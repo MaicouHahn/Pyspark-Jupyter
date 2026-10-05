@@ -1,0 +1,136 @@
+Antes de instalar o pyenv rodar esse comando no shell que são as dependências do pyenv
+ 
+sudo apt update
+sudo apt install -y make build-essential libssl-dev zlib1g-dev \
+libbz2-dev libreadline-dev libsqlite3-dev curl git \
+libncursesw5-dev xz-utils tk-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev libzstd-dev
+
+adicionar o pyenv ao path
+
+echo 'export PYENV_ROOT="$HOME/.pyenv"' >> ~/.bashrc
+echo '[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"' >> ~/.bashrc
+echo 'eval "$(pyenv init - bash)"' >> ~/.bashrc
+echo 'eval "$(pyenv virtualenv-init -)"' >> ~/.bashrc
+
+
+Rodar o instalador do pyenv
+
+curl -fsSL https://pyenv.run | bash
+
+~/.pyenv/bin/pyenv init --install
+
+pyenv init --install
+
+
+reiniciar o bash
+
+
+source ~/.bashrc
+
+conferir a instalação
+
+pyenv --version
+
+se aparecer a versão esta instalado o instalador corretamente
+
+reiniciar o bash 
+
+rodar para instalar a versão padrão do projeto
+
+pyenv install 3.11.9
+
+Agora deve ser setado a versão do pyenv para o global, para assim todas as versões seguirem essa através do comando
+
+pyenv global 3.11.9
+
+pode ser conferido com o comando pyenv versions, se aparecer um * antes da versão ele esta correto
+
+
+
+
+
+Agora com o pyenv que é o gerenciador de versões de python instalado, deverá ser instalado o pipx
+
+python --version
+
+para conferir a versão do python instalado
+
+pip install pipx
+
+para instalar o pipx
+
+se rodar o comando pipx list deve aparecer o aviso
+
+nothing has been installed with pipx 😴
+
+rodar esse comando para assegurar o caminho do pipx e através dele instalar outras coisas
+
+pipx ensurepath
+
+agora instalar o poetry através do comando
+
+pipx install poetry
+
+após isso rodar 
+
+pipx list
+
+para confirmar a instalação do poetry via pipx
+
+também rodar para instalar o comando
+
+pipx install uv
+
+após isso conferir se dentro do pipx estão instalados o uv e o poetry com o comando 
+
+pipx list
+
+(Há um erro que pode acontecer ao instalar o poetry e o uv, que é usar o comando pip ao invés de pipx, o pip instalada usando o próprio python e não o gerenciador que é o pyenv, então caso aconteca isso de rodar a instalação pelo pip, deve ser desinstalado através do pip uninstall poetry ou UV e instalado novamente usando o pipx)
+
+No caso do projeto o professor pede apenas o poetry ou UV, para ser idêntico aos projetos de exemplo do professor, será usado o UV
+
+Após clonar o repositório 
+
+https://github.com/MaicouHahn/Pyspark-Jupyter
+
+inserir nas dependencias do uv os seguintes pacotes que serão usados pelo apache spark do projeto que usa delta lake e do outro que usa o apache iceberg, porém cada um deve ser aberto separadamente e iniciado seu venv 
+
+para o spark-delta-main
+
+dentro da pasta do projeto Pyspark-Jupyter
+
+cd spark-delta-main 
+
+colar o comando abaixo para instalar as dependecias do projeto em questao
+
+uv init
+uv venv
+source .venv/bin/activate
+uv add pyspark==3.5.3 delta-spark==3.2.0 jupyterlab ipykernel
+
+ao usar o comando source .venv/bin/activate ele ativa o .venv que é a virtualização ali do ambiente desse projeto especifico que vai deixar o caminho todo entre parênteses Ex:
+maicou@Maicou:~/Pyspark-Jupyter/spark-delta-main$ source .venv/bin/activate
+(spark-delta-main) maicou@Maicou:~/Pyspark-Jupyter/spark-delta-main$
+
+para sair dele basta digitar deactivate
+
+
+para o spark-iceberg-main
+
+uv init
+uv venv
+source .venv/bin/activate
+uv add pyspark==3.5.3 jupyterlab ipykernel
+
+ao usar o comando source .venv/bin/activate ele ativa o .venv que é a virtualização ali do ambiente desse projeto especifico
+para sair dele basta digitar deactivate
+
+Nessa etapa pode abrir o vscode pelo Windows cada projeto separado
+
+Selecionar o ambiente(envioroment) do ubuntu na canto inferior esquerdo
+
+quando carregar o ubuntu tem de selecionar o kernel do python no canto superior direito para a versão 3.11.09 correspondente ao projeto delta lake ou iceberg
+
+(Caso não apareça a opção, deve ser alterado o acesso da pasta para "Trusted")
+
+
