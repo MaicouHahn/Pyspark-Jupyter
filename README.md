@@ -135,8 +135,8 @@ Agora que o ambiente único está configurado, você pode utilizar o VS Code (ou
 
 * Python: `^3.11.9`
 
-* PySpark: `^x.x.x`
+* PySpark: `^3.5.3`
 
-* JupyterLab: `^x.x.x`
+* JupyterLab: `^4.2.5`
 
-* Delta-Spark: `^x.x.x`
+* Delta-Spark: `^3.2.0`
